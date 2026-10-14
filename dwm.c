@@ -252,6 +252,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void altTab(const Arg *arg);
 
 static int swallow(Client *p, Client *c);
 static void unswallow(Client *c);
@@ -1120,8 +1121,6 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
-	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
-	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
 	grabbuttons(c, 0);
 	if (!c->isfloating)
@@ -1810,11 +1809,6 @@ setfullscreen(Client *c, int fullscreen)
 		c->h = c->oldh;
 		resizeclient(c, c->x, c->y, c->w, c->h);
 		arrange(c->mon);
-
-		/* focus follows the pointer, as in unmanage() */
-		Client *p = getpointerclient();
-		if (p && p->mon == selmon)
-			focus(p);
 	}
 }
 
@@ -2617,6 +2611,17 @@ zoom(const Arg *arg)
 	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
 		return;
 	pop(c);
+}
+
+static void
+altTab(const Arg *arg)
+{
+    if (!selmon->sel || !selmon->lt[selmon->sellt]->arrange)
+        return;
+
+    Arg a = { .i = -1 };
+    focusstack(&a);
+    zoom(NULL);
 }
 
 int
