@@ -1,3 +1,6 @@
+# Deployed by pomni
+- https://github.com/pm-lack/pomni
+
 ## Patches
 
 - [focusfollowmouse](https://github.com/bakkeby/patches/wiki/focusfollowmouse) (Only follows on client close)
