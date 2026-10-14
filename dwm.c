@@ -482,6 +482,7 @@ buttonpress(XEvent *e)
 			click = ClkLtSymbol;
 		else if (ev->x > selmon->ww - (int)TEXTW(stext)) {
 			click = ClkStatusText;
+			x = selmon->ww - TEXTW(stext);
 			char *text = rawstext;
 			int i = -1;
 			char ch;
