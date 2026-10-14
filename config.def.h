@@ -1,5 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
+/* Constants */
+#define TERMINAL "st"
+#define TERMCLASS "St"
+
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -100,6 +104,13 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_8,	   tagandview,	   {.ui = 1 << 7} },
 	{ MODKEY|ControlMask,           XK_9,	   tagandview,	   {.ui = 1 << 8} },
 
+	{ MODKEY,			XK_minus,  spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		XK_minus,  spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%-; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			XK_equal,  spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		XK_equal,  spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%+; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		XK_m,      spawn,          SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			XK_F4,     spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -118,14 +129,21 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+#ifndef __OpenBSD__
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
+	{ ClkStatusText,        0,              Button4,        sigdwmblocks,   {.i = 4} },
+	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
+	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
+#endif
+	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          SHCMD(TERMINAL " -e vim ~/.local/src/dwmblocks/config.h") },
 	{ ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 1} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkRootWin,		0,		Button2,	togglebar,      {0} },
 };
-
