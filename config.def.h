@@ -4,6 +4,7 @@
 #define TERMINAL "st"
 #define TERMCLASS "St"
 #define THUNAR "thunar"
+#define BROWSER "librewolf"
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -128,6 +129,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F4,     spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_F11,    spawn,          SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	{ MODKEY,			XK_t,      spawn,          {.v = (const char*[]){ THUNAR, NULL } } },
+	{ MODKEY|ShiftMask,		XK_b,          spawn,                  {.v = (const char*[]){ BROWSER, NULL } } },
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
