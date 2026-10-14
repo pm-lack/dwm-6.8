@@ -198,6 +198,7 @@ static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
 static void monocle(Monitor *m);
+static void dwindle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static void moveorplace(const Arg *arg);
@@ -1233,6 +1234,46 @@ monocle(Monitor *m)
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
+}
+
+void
+dwindle(Monitor *m)
+{
+	unsigned int i, n, nx, ny, nw, nh;
+	Client *c;
+
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if (n == 0)
+		return;
+
+	nx = m->wx;
+	ny = 0;
+	nw = m->ww;
+	nh = m->wh;
+
+	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
+		if ((i % 2 && nh / 2 > 2 * c->bw)
+		   || (!(i % 2) && nw / 2 > 2 * c->bw)) {
+			if (i < n - 1) {
+				if (i % 2)
+					nh /= 2;
+				else
+					nw /= 2;
+			}
+			if (i % 2)
+				nx += nw;
+			else
+				ny += nh;
+			if (i == 0) {
+				if (n != 1)
+					nw = m->ww * m->mfact;
+				ny = m->wy;
+			} else if (i == 1)
+				nw = m->ww - nw;
+			i++;
+		}
+		resize(c, nx, ny, nw - 2 * c->bw, nh - 2 * c->bw, False);
+	}
 }
 
 void
