@@ -12,7 +12,6 @@ static const char dmenufont[]       = "Misc Tamzen:size=10";
 static const char col_gray1[]       = "#424242";
 static const char col_gray2[]       = "#575757";
 static const char col_gray3[]       = "#e4e4e4";
-static const char col_gray4[]       = "#eeeeee";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
