@@ -1808,6 +1808,11 @@ setfullscreen(Client *c, int fullscreen)
 		c->h = c->oldh;
 		resizeclient(c, c->x, c->y, c->w, c->h);
 		arrange(c->mon);
+
+		/* focus follows the pointer, as in unmanage() */
+		Client *p = getpointerclient();
+		if (p && p->mon == selmon)
+			focus(p);
 	}
 }
 
