@@ -92,6 +92,16 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Left,   tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,		XK_Right,  tagmon,         {.i = +1 } },
 	{ Mod1Mask, 			XK_Tab,    altTab, 	   {0} },
+	{ MODKEY|ControlMask,           XK_1,	   tagandview,	   {.ui = 1 << 0} },
+	{ MODKEY|ControlMask,           XK_2,	   tagandview,	   {.ui = 1 << 1} },
+	{ MODKEY|ControlMask,           XK_3,	   tagandview,	   {.ui = 1 << 2} },
+	{ MODKEY|ControlMask,           XK_4,	   tagandview,	   {.ui = 1 << 3} },
+	{ MODKEY|ControlMask,           XK_5,	   tagandview,	   {.ui = 1 << 4} },
+	{ MODKEY|ControlMask,           XK_6,	   tagandview,	   {.ui = 1 << 5} },
+	{ MODKEY|ControlMask,           XK_7,	   tagandview,	   {.ui = 1 << 6} },
+	{ MODKEY|ControlMask,           XK_8,	   tagandview,	   {.ui = 1 << 7} },
+	{ MODKEY|ControlMask,           XK_9,	   tagandview,	   {.ui = 1 << 8} },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
