@@ -69,6 +69,7 @@ static const char *termcmd[]  = { "st", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,			XK_y,      setlayout,      {.v = &layouts[1]} }, /* toggle */
+	{ MODKEY,           		XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,			XK_d,      spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY|ShiftMask,		XK_d,      spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
