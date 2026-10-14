@@ -47,6 +47,7 @@ static const int refreshrate = 120;  /* refresh rate (per second) for client mov
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[\\]",     dwindle }, /* first entry is default */
+	{ "[\]",      dwindleblank },
 	{ "[]=",      tile },    
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
@@ -104,6 +105,8 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_7,	   tagandview,	   {.ui = 1 << 6} },
 	{ MODKEY|ControlMask,           XK_8,	   tagandview,	   {.ui = 1 << 7} },
 	{ MODKEY|ControlMask,           XK_9,	   tagandview,	   {.ui = 1 << 8} },
+	{ MODKEY,                    XK_BackSpace, toggleblank,    {0} },
+	{ MODKEY|ShiftMask,          XK_BackSpace, toggleblank,	   {0} },
 
 	{ MODKEY,			XK_minus,  spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		XK_minus,  spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%-; kill -44 $(pidof dwmblocks)") },
