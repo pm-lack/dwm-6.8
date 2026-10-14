@@ -3,7 +3,8 @@
 
 ## Patches
 
-- [focusfollowmouse](https://github.com/bakkeby/patches/wiki/focusfollowmouse) (Only follows on client close)
 - [placemouse](https://github.com/bakkeby/patches/wiki/placemouse)
 - [swallow](https://github.com/bakkeby/patches/wiki/swallow)
 - [togglelayout](https://github.com/bakkeby/patches/blob/master/dwm/dwm-togglelayout-6.6.diff)
+- [actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/dwm-actualfullscreen-20211013-cb3f58a.diff)
+- [focusfollowmouse](https://github.com/bakkeby/patches/wiki/focusfollowmouse) (Only follows on client close and fullscreen exit)
