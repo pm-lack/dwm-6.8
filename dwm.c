@@ -2789,12 +2789,6 @@ altTab(const Arg *arg)
     Arg a = { .i = -1 };
     focusstack(&a);
     zoom(NULL);
-
-    Client *p = getpointerclient();
-    if (p && p->mon == selmon)
-        focus(p);
-    else
-        focus(NULL);
 }
 
 int
